@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
-
 import { cn } from "@/lib/utils";
+import { AppHeader } from "@/components/AppHeader";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -22,7 +22,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
-        {children}
+        <div className="flex flex-col items-center">
+          <AppHeader />
+          <div className="w-full pt-20">{children}</div>
+        </div>
       </body>
     </html>
   );

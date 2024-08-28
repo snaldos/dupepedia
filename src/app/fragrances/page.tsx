@@ -17,8 +17,8 @@ export default async function FragrancesPage() {
 
   return (
     <div>
-      <main className="container mx-auto py-36 px-8 flex items-center justify-center">
-        <div className="grid gap-8 lg:grid-cols-2 xl:grid-cols-3">
+      <main className="container mx-auto py-10 px-8 flex items-center justify-center">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {fragrances.map((fragrance) => (
             <FragranceCard key={fragrance.id} fragrance={fragrance} />
           ))}
