@@ -22,9 +22,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
-        <div className="flex flex-col items-center">
+        <div className="min-h-screen flex flex-col items-center">
           <AppHeader />
-          <div className="w-full pt-20">{children}</div>
+          <main className="flex-1 flex flex-col items-center justify-center w-full pt-20">
+            {children}
+          </main>
         </div>
       </body>
     </html>

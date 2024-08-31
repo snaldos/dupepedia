@@ -1,6 +1,7 @@
 export interface Fragrance {
   id: string;
   name: string;
+  nameWithoutAccents: string;
   slug: string;
   image: string | null;
   brand: Brand;

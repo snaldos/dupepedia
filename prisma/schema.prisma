@@ -11,19 +11,20 @@ datasource db {
 }
 
 model Fragrance {
-  id          String       @id @default(cuid())
-  name        String
-  slug        String       @unique
-  image       String?
-  brand       Brand        @relation(fields: [brandId], references: [id])
-  brandId     String
-  category    Category     @relation(fields: [categoryId], references: [id])
-  categoryId  String
-  description String?
-  price       Float
-  ingredients Ingredient[] @relation("FragranceIngredients")
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
+  id                 String       @id @default(cuid())
+  name               String
+  nameWithoutAccents String
+  slug               String       @unique
+  image              String?
+  brand              Brand        @relation(fields: [brandId], references: [id])
+  brandId            String
+  category           Category     @relation(fields: [categoryId], references: [id])
+  categoryId         String
+  description        String?
+  price              Float
+  ingredients        Ingredient[] @relation("FragranceIngredients")
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
 }
 
 model Brand {

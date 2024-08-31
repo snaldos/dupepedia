@@ -13,8 +13,6 @@ export default async function FragrancesPage() {
     },
   });
 
-  console.log(fragrances);
-
   return (
     <div>
       <main className="container mx-auto py-10 px-8 flex items-center justify-center">
