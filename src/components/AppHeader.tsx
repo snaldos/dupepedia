@@ -33,7 +33,7 @@ export function AppHeader() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex justify-between h-20 w-full shrink-0 items-center px-4 md:px-6 gap-2 border bg-card text-card-foreground shadow-sm">
-      <div className="flex w-full items-center gap-2">
+      <div className="flex items-center gap-2 md:w-[100px] xl:w-[200px]">
         <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
           <SheetTrigger asChild>
             <Button variant="outline" size="icon" className="md:hidden">
@@ -41,153 +41,66 @@ export function AppHeader() {
               <span className="sr-only">Toggle navigation menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="w-[300px]">
+          <SheetContent side="left" className="w-[300px] p-4 bg-gray-50">
             <SheetClose asChild>
-              <Link href="#" prefetch={false}>
-                <GiDelicatePerfume size={24} />
+              <Link href="#" prefetch={false} className="flex items-center mb-6">
+                <GiDelicatePerfume size={24} className="text-gray-700" />
                 <span className="sr-only">Company Logo</span>
               </Link>
             </SheetClose>
-            <div className="grid gap-2 py-6">
-              <SheetClose asChild>
-                <Link
-                  href="/"
-                  className="flex w-full items-center py-2 text-lg font-semibold"
-                  prefetch={false}
-                >
-                  Home
-                </Link>
-              </SheetClose>
-              <SheetClose asChild>
-                <Link
-                  href="#"
-                  className="flex w-full items-center py-2 text-lg font-semibold"
-                  prefetch={false}
-                >
-                  About
-                </Link>
-              </SheetClose>
-              <SheetClose asChild>
-                <Link
-                  href="#"
-                  className="flex w-full items-center py-2 text-lg font-semibold"
-                  prefetch={false}
-                >
-                  Services
-                </Link>
-              </SheetClose>
-              <SheetClose asChild>
-                <Link
-                  href="#"
-                  className="flex w-full items-center py-2 text-lg font-semibold"
-                  prefetch={false}
-                >
-                  Portfolio
-                </Link>
-              </SheetClose>
-              <SheetClose asChild>
-                <Link
-                  href="#"
-                  className="flex w-full items-center py-2 text-lg font-semibold"
-                  prefetch={false}
-                >
-                  Contact
-                </Link>
-              </SheetClose>
-              <SheetClose asChild>
-                <Link
-                  href="/fragrances"
-                  className="flex w-full items-center py-2 text-lg font-semibold"
-                  prefetch={false}
-                >
-                  Fragrances
-                </Link>
-              </SheetClose>
-            </div>
+            <nav className="grid gap-4">
+              {["Home", "About", "Services", "Portfolio", "Contact", "Fragrances"].map((path) => (
+                <SheetClose asChild key={path}>
+                  <Link
+                    href={path === "Home" ? "/" : `/${path.toLowerCase()}`}
+                    className="text-lg font-medium text-gray-700 hover:text-gray-900 transition-colors"
+                    prefetch={false}
+                  >
+                    {path}
+                  </Link>
+                </SheetClose>
+              ))}
+            </nav>
           </SheetContent>
         </Sheet>
-        <Link href="#" className="hidden md:flex pr-4 " prefetch={false}>
+        <Link href="/" className="hidden md:flex pr-4 " prefetch={false}>
           <GiDelicatePerfume size={24} />
           <span className="sr-only">Company Logo</span>
         </Link>
+        {/* Centered SearchBar */}
+      </div>
+      <div className="flex flex-grow items-center justify-center md:max-w-xl lg:max-w-2xl xl:max-w-3xl">
         <SearchBar />
       </div>
-      <NavigationMenu className="hidden md:flex">
-        <NavigationMenuList>
-          <NavigationMenuLink asChild>
-            <Link
-              href="/"
-              className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
-              prefetch={false}
-            >
-              Home
-            </Link>
-          </NavigationMenuLink>
-          <NavigationMenuLink asChild>
-            <Link
-              href="#"
-              className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
-              prefetch={false}
-            >
-              About
-            </Link>
-          </NavigationMenuLink>
-          <NavigationMenuLink asChild className="hidden lg:flex">
-            <Link
-              href="#"
-              className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
-              prefetch={false}
-            >
-              Services
-            </Link>
-          </NavigationMenuLink>
-          <NavigationMenuLink asChild className="hidden lg:flex">
-            <Link
-              href="#"
-              className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
-              prefetch={false}
-            >
-              Portfolio
-            </Link>
-          </NavigationMenuLink>
-          <NavigationMenuLink asChild className="hidden xl:flex">
-            <Link
-              href="#"
-              className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
-              prefetch={false}
-            >
-              Contact
-            </Link>
-          </NavigationMenuLink>
-          <NavigationMenuLink asChild className="hidden xl:flex">
-            <Link
-              href="/fragrances"
-              className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
-              prefetch={false}
-            >
-              Fragrances
-            </Link>
-          </NavigationMenuLink>
-          <NavigationMenuLink asChild>
-            <Link
-              href="#"
-              className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
-              prefetch={false}
-            >
-              Login
-            </Link>
-          </NavigationMenuLink>
-          <NavigationMenuLink asChild>
-            <Link
-              href="#"
-              className="group inline-flex h-9 w-max items-center justify-center rounded-md text-white bg-black px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
-              prefetch={false}
-            >
-              Sign Up
-            </Link>
-          </NavigationMenuLink>
-        </NavigationMenuList>
-      </NavigationMenu>
+      <div className="hidden md:flex md:w-[100px] xl:w-[200px] justify-end">
+        <NavigationMenu className="">
+          <NavigationMenuList>
+            {["Fragrances"].map((path, index) => (
+              <NavigationMenuLink className="hidden xl:flex" asChild key={index}>
+                <Link
+                  href={`/${path.toLowerCase()}`}
+                  className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors"
+                  prefetch={false}
+                >
+                  {path}
+                </Link>
+              </NavigationMenuLink>
+            ))}
+
+            {["Log In"].map((path, index) => (
+              <NavigationMenuLink asChild key={index}>
+                <Link
+                  href={path === "Home" ? "/" : `/${path.toLowerCase()}`}
+                  className={`group inline-flex h-11 w-max items-center justify-center rounded-full ${path === "Log In" ? "text-white bg-black" : "text-black bg-white"} px-4 py-2 text-sm font-medium transition-colors`}
+                  prefetch={false}
+                >
+                  {path}
+                </Link>
+              </NavigationMenuLink>
+            ))}
+          </NavigationMenuList>
+        </NavigationMenu>
+      </div>
     </header>
   );
 }
