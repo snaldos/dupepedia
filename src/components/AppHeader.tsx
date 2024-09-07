@@ -32,12 +32,12 @@ export function AppHeader() {
   }, [isSheetOpen]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex justify-between h-20 w-full shrink-0 items-center px-4 md:px-6 gap-2 border bg-card text-card-foreground shadow-sm">
+    <header className="fixed top-0 left-0 right-0 z-50 flex justify-between h-20 w-full shrink-0 items-center px-3 md:px-6 gap-4 border bg-card text-card-foreground transition-shadow duration-300 ease-in-out shadow-sm hover:shadow-md">
       <div className="flex items-center gap-2 md:w-[100px] xl:w-[200px]">
         <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
           <SheetTrigger asChild>
-            <Button variant="outline" size="icon" className="md:hidden">
-              <RxHamburgerMenu size={20} />
+            <Button variant="ghost" size="icon" className="px-0 md:hidden">
+              <RxHamburgerMenu size={28} className="text-gray-500" />
               <span className="sr-only">Toggle navigation menu</span>
             </Button>
           </SheetTrigger>
@@ -63,8 +63,8 @@ export function AppHeader() {
             </nav>
           </SheetContent>
         </Sheet>
-        <Link href="/" className="hidden md:flex pr-4 " prefetch={false}>
-          <GiDelicatePerfume size={24} />
+        <Link href="/" className="hidden md:flex" prefetch={false}>
+          <GiDelicatePerfume size={30} />
           <span className="sr-only">Company Logo</span>
         </Link>
         {/* Centered SearchBar */}

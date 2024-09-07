@@ -24,7 +24,7 @@ export default function RootLayout({
       <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
         <div className="min-h-screen flex flex-col items-center">
           <AppHeader />
-          <main className="flex-1 flex flex-col items-center justify-center w-full pt-20">
+          <main className="flex-1 flex flex-col items-center justify-center w-full pt-20 bg-zinc-50">
             {children}
           </main>
         </div>

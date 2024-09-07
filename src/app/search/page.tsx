@@ -20,7 +20,22 @@ export default function SearchPage() {
   const search = useSearchParams();
   const searchQuery = search ? search.get("q") : null;
   const encodedSearchQuery = encodeURI(searchQuery || "");
-  const { data, error, isLoading } = useSWR(`/api/search?q=${encodedSearchQuery}`, fetchFragrances);
+  const { data, error, isLoading } = useSWR(
+    searchQuery ? `/api/search?q=${encodedSearchQuery}` : null, // Only fetch if searchQuery exists
+    fetchFragrances,
+  );
+
+  if (!searchQuery) {
+    // Beautiful search page content when there's no search query
+    return (
+      <div className="flex flex-col items-center justify-center py-10 px-8">
+        <h1 className="text-4xl font-bold mb-4">Find Your Perfect Fragrance</h1>
+        <p className="text-lg text-gray-500 mb-8">
+          Discover similar fragrances to yours! Start by entering the desired fragrance.
+        </p>
+      </div>
+    );
+  }
 
   if (isLoading) return <Loading />;
   if (error) return <div>Error: {error.message}</div>;

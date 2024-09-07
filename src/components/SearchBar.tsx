@@ -3,6 +3,8 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FiSearch, FiX } from "react-icons/fi"; // Import the search icon from react-icons
+import { FaMagnifyingGlass } from "react-icons/fa6";
+
 import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 
@@ -32,6 +34,8 @@ export function SearchBar() {
 
   const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setSearchQuery(searchQuery);
+    onSearch(searchQuery);
     e.currentTarget.querySelector("input")?.blur();
   };
 
@@ -59,7 +63,7 @@ export function SearchBar() {
 
   const onBlur = () => {
     setIsFocused(false);
-    if (searchQuery === "") {
+    if (searchQuery === "" && pathname === "/search") {
       router.push(prevUrl);
     }
   };
@@ -71,20 +75,32 @@ export function SearchBar() {
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Escape") {
+      setSearchQuery("");
+      (e.target as HTMLInputElement).blur(); // Blurring the input
+      router.push(prevUrl);
+    }
+  };
+
   return (
     <form className="relative flex w-full items-center" onSubmit={onFormSubmit}>
       <div className="relative w-full">
-        <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
+        <FaMagnifyingGlass
+          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+          size={18}
+        />
         <Input
           value={searchQuery}
           onChange={onInputChange}
           onFocus={onFocus}
+          onKeyDown={handleKeyDown}
           onBlur={onBlur}
-          className="pl-10 h-11 pr-10 py-2 rounded-full bg-accent border-none 
+          className="h-11 px-10 py-2 rounded-full bg-accent border-none 
                      focus:ring-2 focus:ring-primary focus:ring-opacity-50
-                     focus:outline-none transition-all duration-300 ease-in-out shadow-md"
+                     focus:outline-none transition-all duration-300 ease-in-out shadow-sm hover:shadow-md"
           type="text"
-          placeholder="What fragrance are you looking for?"
+          placeholder="Search for a fragrance..."
         />
         {searchQuery !== "" && (
           <Button
