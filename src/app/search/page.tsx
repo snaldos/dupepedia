@@ -5,25 +5,13 @@ import { Fragrance } from "@/interfaces/models";
 import { useSearchParams } from "next/navigation";
 import useSWR from "swr";
 import Loading from "./loading";
-
-const fetchFragrances = async (url: string) => {
-  const response = await fetch(url);
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch fragrances");
-  }
-
-  return response.json();
-};
+import { fetchFragrances } from "@/lib/utils";
 
 export default function SearchPage() {
   const search = useSearchParams();
   const searchQuery = search ? search.get("q") : null;
   const encodedSearchQuery = encodeURI(searchQuery || "");
-  const { data, error, isLoading } = useSWR(
-    searchQuery ? `/api/search?q=${encodedSearchQuery}` : null, // Only fetch if searchQuery exists
-    fetchFragrances,
-  );
+  const { data, error, isLoading } = useSWR(`/api/search?q=${encodedSearchQuery}`, fetchFragrances);
 
   if (!searchQuery) {
     // Beautiful search page content when there's no search query

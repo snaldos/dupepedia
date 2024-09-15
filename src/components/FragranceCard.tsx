@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Fragrance } from "@/interfaces/models";
 
+import { cn } from "@/lib/utils";
 import {
   Card,
   CardContent,
@@ -11,10 +12,21 @@ import {
 } from "@/components/ui/card";
 import Link from "next/link";
 
-export default function FragranceCard({ fragrance }: { fragrance: Fragrance | null }) {
+export default function FragranceCard({
+  fragrance,
+  className,
+}: {
+  fragrance: Fragrance | null;
+  className?: string;
+}) {
   return (
     <Link className="" href={`fragrances/${fragrance?.slug}`}>
-      <Card className="shadow-lg overflow-hidden w-[200px] transition-transform duration-300 ease-in-out hover:scale-105">
+      <Card
+        className={cn(
+          "shadow-lg overflow-hidden w-[200px] transition-transform duration-300 ease-in-out hover:scale-105",
+          className,
+        )}
+      >
         <CardHeader></CardHeader>
         <CardContent className="w-full px-10">
           <div className="flex items-center justify-center relative w-full h-0 pb-[133.2%]">
